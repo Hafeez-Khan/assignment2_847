@@ -1,26 +1,9 @@
 language: python
 python:
-	- '3.6'
-
-install:
-	- pip install codecov
-
+	- '2.7'
+	- '3.7'
 addons:
 	ssh_known_hosts: moon.scs.ryerson.ca
 
 script:
-	-python -m unittest -v sample_test.py
-	-coverage run sample_test.py
-
-after_success:
-	bash <(curl -s https://codecov.io/bash)
-
-deploy:
-    provider: script
-    skip_cleanup: true
-    script: rsync -r --delete-after --quiet
-      ${TRAVIS_BUILD_DIR}/deploy_folder
-      m533khan@moon.scs.ryerson.ca:/home/avm/courses/cps847/m533khan
-      #home/avm/courses/cps847/your_scs_id 
-    on:
-      branch: master
+	-python -m unittest discover -v .
