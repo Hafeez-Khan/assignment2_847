@@ -4,6 +4,10 @@ python:
  - '3.7'
 addons:
  ssh_known_hosts: moon.scs.ryerson.ca
-
+ 
+after_success:
+  bash <(curl -s https://codecov.io/bash)
+  
 script:
  - python -m unittest discover -v .
+
